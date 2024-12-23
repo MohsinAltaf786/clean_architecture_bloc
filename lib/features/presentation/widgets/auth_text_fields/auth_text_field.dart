@@ -25,7 +25,7 @@ class AuthTextField extends StatelessWidget {
 class AuthPasswordField extends StatelessWidget {
   const AuthPasswordField({super.key,required this.onPressed,required this.isPasswordVisible,required this.passController});
    final TextEditingController passController;
-   final  Function()onPressed;
+   final Function()? onPressed;
    final bool isPasswordVisible;
   @override
   Widget build(BuildContext context) {

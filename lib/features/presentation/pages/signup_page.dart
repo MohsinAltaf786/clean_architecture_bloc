@@ -20,7 +20,6 @@ class SignupPageState extends State<SignupPage> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   bool _isPasswordVisible = false;
-
   @override
   void dispose() {
     _nameController.dispose();
@@ -33,9 +32,6 @@ class SignupPageState extends State<SignupPage> {
     if (_formKey.currentState!.validate()) {
       context.read<AuthBloc>().add(AuthSignUp(_emailController.text.trim(),
           _passController.text.trim(), _nameController.text.trim()));
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //  const SnackBar(content: Text('Form is valid!')),
-      // );
     }
   }
 
@@ -54,12 +50,13 @@ class SignupPageState extends State<SignupPage> {
               showSnackBar(context: context, content: state.message);
               log('=================> error occured');
             }
-            if (state is AuthSuccess) {}
+            if (state is AuthSuccess) {
+              Navigator.pop(context);
+            }
           },
           builder: (context, state) {
-            if (state is AuthLoading) {
-              return const Loader();
-            } else if (state is AuthSuccess) {
+
+             if (state is AuthSuccess|| state is AuthLoading) {
               return Form(
                 key: _formKey,
                 child: Column(
@@ -78,7 +75,7 @@ class SignupPageState extends State<SignupPage> {
                       height: 16,
                     ),
                     AuthPasswordField(
-                        onPressed: () {
+                        onPressed: (state is AuthLoading) ? null:() {
                           setState(() {
                             _isPasswordVisible = !_isPasswordVisible;
                           });
@@ -90,14 +87,22 @@ class SignupPageState extends State<SignupPage> {
                       Expanded(
                         flex: 2,
                         child: ElevatedButton(
-                          onPressed: _submitForm,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                          ),
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                            onPressed: _submitForm,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                            ),
+                            child: Row(
+                              mainAxisAlignment:MainAxisAlignment.center,
+                              children: [
+                              const Text(
+                                'Sign Up',
+                                style: TextStyle(color: Colors.white),
+                              ),const SizedBox(width: 5,),
+                              state is AuthLoading? SizedBox(
+                                  height:7,
+                                  width: 7,
+                                  child: const Loader()):const SizedBox()
+                            ],)
                         ),
                       ),
                     ]),
@@ -117,14 +122,14 @@ class SignupPageState extends State<SignupPage> {
                                   color: Colors.black,
                                 ),
                                 children: [
-                              TextSpan(
-                                text: 'Sign in ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ])),
+                                  TextSpan(
+                                    text: 'Sign in ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ])),
                       ),
                     )
                   ],
@@ -149,7 +154,7 @@ class SignupPageState extends State<SignupPage> {
                       height: 16,
                     ),
                     AuthPasswordField(
-                        onPressed: () {
+                        onPressed: (state is AuthLoading) ? null:() {
                           setState(() {
                             _isPasswordVisible = !_isPasswordVisible;
                           });
@@ -165,10 +170,13 @@ class SignupPageState extends State<SignupPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black,
                           ),
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          child: Row(children: [
+                            const Text(
+                              'Sign Up',
+                              style: TextStyle(color: Colors.white),
+                            ),const SizedBox(width: 5,),
+                            state is AuthLoading? const Loader():const SizedBox()
+                          ],)
                         ),
                       ),
                     ]),
