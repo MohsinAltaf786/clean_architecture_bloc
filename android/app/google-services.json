@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "763661095236",
+    "project_id": "clean-architecture-pract-56f72",
+    "storage_bucket": "clean-architecture-pract-56f72.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763661095236:android:d51b7aeaf1073f0d8b0711",
+        "android_client_info": {
+          "package_name": "com.mohsin.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdN-joLj8lh-r-HVN9FG4Mk5Sd7G9cb_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
