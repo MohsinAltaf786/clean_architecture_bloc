@@ -1,12 +1,14 @@
 import 'package:clean_architecture_practice/core/error/exception.dart';
 import 'package:clean_architecture_practice/core/error/failure.dart';
 import 'package:clean_architecture_practice/features/data/data_sources/auth_remote_data_source.dart';
+import 'package:clean_architecture_practice/features/data/model/user_model.dart';
 import 'package:clean_architecture_practice/features/domain/entities/user.dart';
 import 'package:clean_architecture_practice/features/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 class AuthRepositoryImp implements AuthRepository{
   final AuthRemoteDataSource authRemoteDataSource;
   AuthRepositoryImp(this.authRemoteDataSource);
+
 
   Future <Either<Failure,User>>signupWithEmailPassword ({
     required String email,

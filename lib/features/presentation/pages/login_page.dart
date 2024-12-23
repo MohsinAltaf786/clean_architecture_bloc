@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:clean_architecture_practice/core/common/widgets/loader.dart';
 import 'package:clean_architecture_practice/features/presentation/bloc/auth_bloc.dart';
+import 'package:clean_architecture_practice/features/presentation/pages/home_page.dart';
 import 'package:clean_architecture_practice/features/presentation/pages/signup_page.dart';
 import 'package:clean_architecture_practice/features/presentation/widgets/auth_text_fields/auth_text_field.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -44,6 +44,7 @@ class LoginPageState extends State<LoginPage> {
         child: BlocConsumer<AuthBloc, AuthState>(
   listener: (context, state) {
    if(state is AuthSuccess){
+     Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>HomePage()),);
      log('========> successfully loged');
    }
   },
