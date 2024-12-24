@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:clean_architecture_practice/core/common/widgets/loader.dart';
+import 'package:clean_architecture_practice/core/utils/show_snackbar.dart';
 import 'package:clean_architecture_practice/features/presentation/bloc/auth_bloc.dart';
 import 'package:clean_architecture_practice/features/presentation/pages/home_page.dart';
 import 'package:clean_architecture_practice/features/presentation/pages/signup_page.dart';
@@ -43,9 +44,13 @@ class LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(16.0),
         child: BlocConsumer<AuthBloc, AuthState>(
   listener: (context, state) {
+    if (state is AuthFailure) {
+      showSnackBar(context: context, content: state.message);
+      log('=================> error occured');
+    }
    if(state is AuthSuccess){
      Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>HomePage()),);
-     log('========> successfully loged');
+
    }
   },
   builder: (context, state) {

@@ -2,6 +2,7 @@
 import 'package:clean_architecture_practice/features/data/data_sources/auth_remote_data_source.dart';
 import 'package:clean_architecture_practice/features/data/repositories/auth_repository_imp.dart';
 import 'package:clean_architecture_practice/features/domain/repository/auth_repository.dart';
+import 'package:clean_architecture_practice/features/domain/usecases/current_user.dart';
 import 'package:clean_architecture_practice/features/domain/usecases/user_login.dart';
 import 'package:clean_architecture_practice/features/domain/usecases/user_signup.dart';
 import 'package:clean_architecture_practice/features/presentation/bloc/auth_bloc.dart';
@@ -22,5 +23,6 @@ serviceLocater.registerFactory<AuthRemoteDataSource>(()=>AuthRemoteDataSourceImp
 serviceLocater.registerFactory<AuthRepository>(()=>AuthRepositoryImp(serviceLocater()));
 serviceLocater.registerFactory(()=>UserSignup(serviceLocater()));
 serviceLocater.registerFactory(()=>UserLogin(serviceLocater()));
-serviceLocater.registerLazySingleton(()=>AuthBloc(userSignup: serviceLocater(), userLogin: serviceLocater()));
+serviceLocater.registerFactory(()=>CurrentUser(serviceLocater()));
+serviceLocater.registerLazySingleton(()=>AuthBloc(userSignup: serviceLocater(), userLogin: serviceLocater(),currentUser: serviceLocater()));
 }

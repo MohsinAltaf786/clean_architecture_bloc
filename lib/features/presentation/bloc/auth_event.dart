@@ -15,3 +15,6 @@ final class AuthLogin extends AuthEvent{
 
   AuthLogin(this.email, this.password);
 }
+final class AuthCurrentUser extends AuthEvent{
+  AuthCurrentUser();
+}

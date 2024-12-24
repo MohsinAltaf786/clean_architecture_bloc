@@ -15,6 +15,7 @@ abstract interface class AuthRemoteDataSource{
     required String email,
     required String password,
   });
+  Future<UserModel>getCurrentUser();
 
 }
 
@@ -62,5 +63,21 @@ class AuthRemoteDataSourceImp implements AuthRemoteDataSource{
     }
     throw UnimplementedError();
   }
+  @override
+  Future<UserModel>getCurrentUser() async{
+try{
+  if(firebaseAuth.currentUser!=null){
+    UserModel userModel=UserModel(email:firebaseAuth.currentUser?.email??'', id:firebaseAuth.currentUser?.uid??'', name: firebaseAuth.currentUser?.displayName??'');
+    return userModel;
+  }
+}on ServerException catch(e){
+  log('an error occured ${e.message}');
+} on FirebaseAuthException catch(e){
+  log('an error occured ${e.message}');
+}
+
+ throw UnimplementedError();
+  }
+
 
 }
