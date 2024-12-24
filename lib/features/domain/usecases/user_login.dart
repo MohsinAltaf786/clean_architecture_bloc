@@ -11,12 +11,9 @@ class UserLogin implements UseCase<User,UserLoginParms>{
   Future<Either<Failure,User>>call(UserLoginParms parms)async{
     return await authRepository.loginWithEmailPassword(email:parms.email, password:parms.password);
   }
-
 }
 class UserLoginParms{
   final String email;
   final String password;
-
   UserLoginParms(this.email, this.password,);
-
 }

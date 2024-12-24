@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clean_architecture_practice/features/data/model/user_model.dart';
 import 'package:clean_architecture_practice/features/presentation/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,15 @@ class HomePage extends StatelessWidget {
       body: BlocConsumer<AuthBloc, AuthState>(
   listener: (context, state) {
     // TODO: implement listener
+    if(state is AuthSuccess){
+      log('Success state ');
+    }
+    if(state is AuthFailure){
+      log('Failure State');
+    }
+    if(state is AuthLoading){
+      log('Auth Loading State');
+    }
   },
   builder: (context, state) {
    if(state is AuthSuccess){
